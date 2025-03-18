@@ -19,7 +19,7 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://rds-endpoint:5432/payrolldb"
+              value: "jdbc:postgresql://rds-endpoint:5432/payrolldb" #TODO: update endpoint here - variable
 
 ---
 
