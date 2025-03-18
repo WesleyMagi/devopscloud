@@ -1,0 +1,24 @@
+stages:
+  - build
+  - test
+  - dockerise
+  - deploy
+
+backend:
+  stage: build
+  script:
+    - cd spring-boot-react-example
+    - ./mvnw clean package
+  artifacts:
+    paths:
+      - spring-boot-react-example/target/*.jar
+
+frontend:
+  stage: build
+  script:
+    - cd spring-boot-react-example/src/main/js
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - spring-boot-react-example/src/main/resources/static/
