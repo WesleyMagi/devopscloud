@@ -63,3 +63,27 @@ variable "db_skip_final_snapshot" {
   type        = bool
   default     = true
 }
+
+variable "eks_cluster_name" {
+  description = "Name of the EKS cluster"
+  type        = string
+  default     = "spring-app-eks-cluster"
+}
+
+variable "eks_node_desired_capacity" {
+  description = "Desired number of nodes in the EKS node group"
+  type        = number
+  default     = 2
+}
+
+variable "eks_node_min_size" {
+  description = "Minimum number of nodes in the EKS node group"
+  type        = number
+  default     = 1
+}
+
+variable "eks_node_max_size" {
+  description = "Maximum number of nodes in the EKS node group"
+  type        = number
+  default     = 3
+}
