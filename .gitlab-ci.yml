@@ -22,3 +22,16 @@ frontend:
   artifacts:
     paths:
       - spring-boot-react-example/src/main/resources/static/
+
+test-backend:
+  stage: test
+  script:
+    - cd spring-boot-react-example
+    - ./mvnw test
+
+
+test-frontend:
+  stage: test
+  script:
+    - cd spring-boot-react-example/src/main/js
+    - npm test
