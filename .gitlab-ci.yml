@@ -3,12 +3,14 @@ stages:
   - test
   - dockerise
   - deploy
+  - destroy
 
 variables:
   DOCKER_IMAGE_BACKEND: $CI_REGISTRY_IMAGE/backend
   DOCKER_IMAGE_FRONTEND: $CI_REGISTRY_IMAGE/frontend
   KUBE_CONFIG_PATH: $KUBE_CONFIG_PATH
-  
+  ENVIRONMENT: $ENVIRONMENT
+
 
 backend:
   stage: build
@@ -45,13 +47,13 @@ test-frontend:
 build-docker-backend:
   stage: dockerise
   script:
-    - docker build -t $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHORT_SHA spring-boot-react-example/
+    - docker build -t $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHORT_SHA -f Dockerfile-backend spring-boot-react-example
     - docker push $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHORT_SHA
 
 build-docker-frontend:
   stage: dockerise
   script:
-    - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHORT_SHA spring-boot-react-example/src/main/js/
+    - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHORT_SHA -f Dockerfile-frontend spring-boot-react-example/src/main/js/
     - docker push $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHORT_SHA
   
 deploy-backend:
@@ -70,3 +72,15 @@ deploy-frontend:
     - kubectl apply -f spring-boot-react-example/k8s/frontend-deployment.yaml
     - kubectl set image deployment/frontend frontend=$DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHORT_SHA
     - kubectl rollout status deployment/frontend
+
+
+deploy-infrastructure:
+  stage: deploy
+  script:
+    - cd terraform
+    - terraform init
+    - terraform workspace select $ENVIRONMENT || terraform workspace new $ENVIRONMENT
+    - terrform apply -auto-approve
+
+
+destroy-infrastructure:
