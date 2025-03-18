@@ -4,6 +4,10 @@ stages:
   - dockerise
   - deploy
 
+variables:
+  DOCKER_IMAGE_BACKEND: $CI_REGISTRY_IMAGE/backend
+  DOCKER_IMAGE_FRONTEND: $CI_REGISTRY_IMAGE/frontend
+
 backend:
   stage: build
   script:
@@ -35,3 +39,15 @@ test-frontend:
   script:
     - cd spring-boot-react-example/src/main/js
     - npm test
+  
+build-docker-backend:
+  stage: dockerise
+  script:
+    - docker build -t $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHORT_SHA spring-boot-react-example/
+    - docker push $DOCKER_IMAGE_BACKEND:$CI_COMMIT_SHORT_SHA
+
+build-docker-frontend:
+  stage: dockerise
+  script:
+    - docker build -t $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHORT_SHA spring-boot-react-example/src/main/js/
+    - docker push $DOCKER_IMAGE_FRONTEND:$CI_COMMIT_SHORT_SHA
