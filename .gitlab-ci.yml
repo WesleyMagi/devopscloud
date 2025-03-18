@@ -80,7 +80,12 @@ deploy-infrastructure:
     - cd terraform
     - terraform init
     - terraform workspace select $ENVIRONMENT || terraform workspace new $ENVIRONMENT
-    - terrform apply -auto-approve
+    - terraform apply -auto-approve
 
 
 destroy-infrastructure:
+  stage: destroy
+  script:
+    - cd terraform
+    - terraform workspace select $ENVIRONMENT || terraform workspace new $ENVIRONMENT
+    - terraform destroy -auto-approve
