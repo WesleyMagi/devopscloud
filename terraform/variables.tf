@@ -4,6 +4,7 @@ variable "aws_region" {
   default     = "eu-central-1"
 }
 
+# VPC Configuration
 variable "vpc_cidr" {
   description = "The CIDR block for the VPC"
   type        = string
@@ -69,6 +70,8 @@ variable "db_skip_final_snapshot" {
   type        = bool
   default     = true
 }
+
+# EKS configuration
 
 variable "eks_cluster_name" {
   description = "Name of the EKS cluster"

@@ -2,8 +2,22 @@ provider "aws" {
   region = var.aws_region
 }
 
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
+}
+
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
+}
+
+resource "aws_route_table" "rt" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_route" "default_route" {
+  route_table_id         = aws_route_table.rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.gw.id
 }
 
 resource "aws_subnet" "subnet1" {
@@ -50,7 +64,7 @@ resource "aws_eks_node_group" "eks_nodes" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "${var.eks_cluster_name}-node-group"
   node_role_arn   = aws_iam_role.eks_role.arn
-  subnet_ids      = [aws_subnet.subnet_1.id, aws_subnet.subnet_2.id]
+  subnet_ids      = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
 
   scaling_config {
     desired_size = var.eks_node_desired_capacity
