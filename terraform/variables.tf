@@ -10,6 +10,12 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
+variable "subnet_cidrs" {
+  description = "List of CIDR blocks for public subnets"
+  type        = list(string)
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
 variable "db_alloted_storage" {
   description = "The allocated storage for the database"
   type        = number
@@ -47,9 +53,9 @@ variable "db_username" {
 }
 
 variable "db_password" {
-  description = "The database password"
+  description = "Database password (use secrets manager in production)"
   type        = string
-  default     = "foobar"
+  sensitive   = true
 }
 
 variable "db_parameter_group_name" {
