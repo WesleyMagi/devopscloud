@@ -66,7 +66,7 @@ The system is **containerized** and deployed on **AWS EKS**, with an RDS databas
 |-----------|---------------------|
 | **Build** | Compiles backend (Maven) & frontend (React). |
 | **Test** | Runs unit tests for both components. |
-| **Dockerize** | Builds & pushes Docker images to GitLab registry. |
+| **Dockerise** | Builds & pushes Docker images to GitLab registry. |
 | **Deploy** | Deploys to Kubernetes (EKS) using `kubectl`. |
 | **Destroy** | Optionally destroys the infrastructure. |
 
@@ -106,7 +106,7 @@ $env:AWS_SECRET_ACCESS_KEY="your-secret-key"
 
 Verify credentials by running:
 ```bash
-aws sts get-caller-identity\
+aws sts get-caller-identity
 ```
 
 ### **4️⃣ Configure Terraform & Deploy Infrastructure**  
