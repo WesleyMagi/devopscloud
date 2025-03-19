@@ -86,7 +86,7 @@ Ensure the following tools are installed:
 ### **2️⃣ Fork & Clone the Repository**  
 ```bash
 git clone https://github.com/WesleyMagi/devopscloud.git
-cd spring-boot-react-example
+cd devopscloud
 ```
 
 ### **3️⃣ Set Up AWS Credentials**  
