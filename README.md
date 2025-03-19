@@ -4,7 +4,7 @@
 This project demonstrates a **CI/CD pipeline** and **infrastructure automation** for deploying a **Java Spring Boot backend** and a **React frontend** to AWS using **GitLab CI/CD, Terraform, Docker, and Kubernetes**.  
 
 The solution includes:  
-- **CI/CD Pipeline**: Automates build, test, Dockerization, and deployment.  
+- **CI/CD Pipeline**: Automates build, test, Dockerisation, and deployment.  
 - **Infrastructure as Code (IaC)**: Uses **Terraform** to provision AWS infrastructure.  
 - **AWS Services Used**: EKS (Kubernetes), RDS (PostgreSQL), VPC, Subnets, IAM, and CloudWatch.  
 - **Automated Scaling**: Kubernetes auto-scaling for high availability.  
@@ -15,7 +15,7 @@ This project consists of a **React frontend** and a **Spring Boot backend**, dep
 ---
 
 ## 🎯 **Architecture**  
-The system is **containerized** and deployed on **AWS EKS**, with an RDS database and managed networking.  
+The system is **containerised** and deployed on **AWS EKS**, with an RDS database and managed networking.  
 
 ### **1️⃣ Infrastructure Components**  
 | **Component**  | **Description**  |
@@ -24,7 +24,7 @@ The system is **containerized** and deployed on **AWS EKS**, with an RDS databas
 | **EKS Cluster**  | Manages Kubernetes workloads for **backend & frontend containers**. |
 | **RDS PostgreSQL**  | Persistent database replacing the in-memory DB. |
 | **IAM Roles & Policies**  | Secure access for EKS nodes, Terraform, and CI/CD. |
-| **CloudWatch Logs**  | Centralized logging for debugging and monitoring. |
+| **CloudWatch Logs**  | Centralised logging for debugging and monitoring. |
 | **Frontend**        | React, Node.js    |
 | **Backend**         | Spring Boot, Java |
 
@@ -111,8 +111,8 @@ aws sts get-caller-identity
 
 ### **4️⃣ Configure Terraform & Deploy Infrastructure**  
 
-#### **Initialize Terraform**  
-Navigate to the Terraform directory and initialize the Terraform backend:  
+#### **Initialise Terraform**  
+Navigate to the Terraform directory and initialise the Terraform backend:  
 
 ```bash
 terraform init  
